@@ -89,7 +89,6 @@
 
         </LinearLayout>
 
-
         <com.balysv.materialripple.MaterialRippleLayout
             android:id="@+id/bt_getcode"
             style="@style/RippleStyleWhite"

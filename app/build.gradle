@@ -1,11 +1,6 @@
 apply plugin: 'com.android.application'
 
 
-ext.minSdkVersion = 15
-ext.majorVersion = 1
-ext.minorVersion = 0
-ext.patchVersion = 0
-ext.versionClassifier = null
 
 
 android {
@@ -15,38 +10,13 @@ android {
         applicationId "com.fransunisoft.coronavirus"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode generateVersionCode()
-        versionName generateVersionName()
+
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            shrinkResources false
-            zipAlignEnabled false
-            jniDebuggable false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            debuggable false
-            android.applicationVariants.all {
-                variant ->
-                    variant.outputs.all {
-                        outputFileName = "Coronavirus_App_v${defaultConfig.versionName}_${releaseDate()}_${releaseTime()}.apk"
-                    }
-            }
-
-        }
-        debug {
-            minifyEnabled false
-            shrinkResources false
-            zipAlignEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            //signingConfig signingConfigs.config
-        }
-    }
 
 
     dependencies {
@@ -92,21 +62,4 @@ android {
     }
 
 }
-static def releaseDate() {
-    return new Date().format("ddMMyyyy")
-}
 
-static def releaseTime() {
-    return new Date().format("HHmm")
-}
-
-private Integer generateVersionCode() {
-    return ext.minSdkVersion * 10000000 + ext.majorVersion * 10000 +
-            ext.minorVersion * 100 + ext.patchVersion
-}
-private String generateVersionName() {
-    String versionName = "${ext.majorVersion}.${ext.minorVersion}.${ext.patchVersion}"
-    if (ext.versionClassifier != null)
-        versionName += "-${ext.versionClassifier}"
-    return versionName
-}
